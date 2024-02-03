@@ -101,3 +101,140 @@ int const n;
 ### 범위와 수명
 - **범위**: 변수가 프로그램 내에서 접근 가능한 영역을 말한다. 예를 들어, 지역 변수는 선언된 함수 내에서만 접근할 수 있고 전역 변수는 프로그램 전체 어디서나 접근 가능하다.
 - **수명**: 변수가 메모리에 할당되어 있는 기간을 말한다. 예를 들어, 지역 변수의 수명은 함수 호출부터 함수 실행이 종료되면 끝나고 전역 변수나 정적 변수의 수명은 프로그램이 실행되고 끝날 때까지 지속된다. 동적 변수의 수명은 개발자가 메모리를 할당하고 해제하는 시점에 따라 결정된다.
+
+## 조건문과 반복문
+### 조건문
+조건이 성립하는 경우에만 소스코드를 수행하도록 하는 명령어이다.
+```
+if (a > 5)
+{
+    std::cout << "a is bigger than 5";
+}
+else
+{
+    std::cout << "a is not bigger than 5;
+}
+```
+### 반복문
+프로그램 내에서 똑같은 명령을 특정 횟수만큼 반복하여 수행하도록 하는 명령어이다.
+```
+for (int i=0; i<5; i++)
+{
+    std::cout << i; // 0 1 2 3 4
+}
+```
+
+## 함수
+함수는 특정한 목적을 위해 독립적으로 쓰인 코드의 집합이다.
+```
+int add(int a, int b)
+{
+    return a + b;
+}
+
+int main()
+{
+    int a = 1;
+    int b = 2;
+    int sum = add(a, b);
+
+    std::cout << sum; // 3
+}
+```
+리턴 값이 없는 함수도 가능하다.
+```
+void print()
+{
+    std::cout << "Hi!";
+}
+```
+## 클래스와 객체
+클래스는 붕어빵을 만드는 틀이고 객체는 그 틀에서 찍혀나오는 각각의 붕어빵(인스턴스)이다. 이것들은 팥 붕어빵이고 사람처럼 먹거나 말할 수 있다고 가정해보자.
+```
+class Bread
+{
+    private:
+        string filling = "red bean";
+
+    public:
+        void eat(){
+            std::cout << "Eating";
+            }
+
+        void talk(){
+            std::cout << "Talking";
+        }
+}
+```
+Private과 Public을 구분해준 이유는 객체지향적 속성 중 *캡슐화* 때문이다. 자세한건 아래에서 살펴보자.
+## 객체지향적 프로그래밍(OOP)
+실세계의 사물을 객체로 모델링하여 프로그램을 구성하는 방법론이다. 이를 통해 복잡한 시스템을 보다 쉽게 관리하고 이해할 수 있게 만든다.
+#### 핵심개념
+1. **상속성(inheritance)**: 코드의 재사용을 통해 새로운 기능을 쉽게 추가할 수 있게 한다.
+```
+class Vehicle {
+    public:
+        void move() {
+            std::cout << "Vehicle is moving"
+        }
+};
+
+class Car : public Vehicle {
+    public:
+        void move() {
+            std::cout << "Car is moving"
+        }
+}
+```
+2. **다형성(polymorphism)**: 같은 인터페이스 아래에서 다른 행동을 구현할 수 있게 하여 코드의 유연성을 높인다.
+```
+Vehicle* v = new Car();
+v->move(); // Car is moving
+```
+3. **캡슐화(encapsulation)**: 객체의 세부 구현을 숨기고 필요한 부분만 노출시켜 데이터 보호와 인터페이스 간소화를 할 수 있다.
+```
+class Vehicle {
+    private:
+        int speed;
+
+    public:
+        void setSpeed(int s) {
+            speed = s;
+        }
+
+        int getSpeed() {
+            return speed;
+        }
+}
+```
+## 예외 처리
+프로그램 실행 중 예외가 발생할 경우, try 블록 내의 코드 실행이 중단되고, 해당 예외를 처리할 수 있는 catch 블록으로 제어가 이동한다. 이를 통해 예외 상황에서도 안정적으로 동작하도록 관리할 수 있다.
+```
+try {
+    throw "An error occured";
+}
+catch(const char* msg) {
+    std::cout << msg;
+}
+```
+
+#### 주요 예외 유형
+std::exception 파생 클래스들
+- std::runtime_error: 실행 시간 오류
+- std::logic_error: 프로그램 로직 오류
+- std::out_of_range: 범위를 벗어난 접근 시
+- std::invalid_argument: 잘못된 인자 전달 시
+```
+#include <iostream>
+#include <stdexcept> // 표준 예외 클래스 사용을 위한 헤더
+
+int main() {
+    try {
+        // error code
+        throw std::out_of_range("Index out of range");
+    }
+    catch(const std::exception& e) {
+        std::cout << e.what(); // what()은 발생한 예외의 설명을 반환한다.
+    }
+}
+```
