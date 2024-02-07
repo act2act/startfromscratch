@@ -111,6 +111,17 @@ int main() {
     int *ip; // 포인터 변수 선언
 
     ip = &var; // var 주소를 포인터 변수에 저장
+
+    /*
+    선언과 동시에 초기화하는 방법    
+    int var = 20;
+    int *ip = &var;
+    */
+
+    std::cout << var << std::endl; // 20
+    std::cout << *ip << std::endl; // 20
+
+    return 0;
 }
 ```
 
