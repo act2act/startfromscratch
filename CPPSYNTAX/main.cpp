@@ -1,5 +1,7 @@
 #include <iostream>
 
-int main() {
-    std::cout << "Hello";
+int main()
+{
+
+    return EXIT_SUCCESS;
 }
